@@ -9,8 +9,6 @@ import { Game } from '../interfaces/game';
 })
 
 
-
-
 export class GameService {
   constructor(
     private http: HttpClient
@@ -18,9 +16,11 @@ export class GameService {
 
   searchByName(searchText: string): Observable<Game[]> {
     const alteredText = searchText.replace(/\s/g, '+');
-    return this.http.get<Game[]>(`https://api.boardgameatlas.com/api/search?name=${alteredText}&client_id=${environment.boardgameAPI}`).pipe(
-        map(response => response['games'])
+    return this.http.get<Game[]>(`https://api.boardgameatlas.com/api/search?name=${alteredText}&client_id=${environment.boardGameAPI}`).pipe(
+        map((response : any) => response['games']
+      )
     )
+    
   };
 
 }
